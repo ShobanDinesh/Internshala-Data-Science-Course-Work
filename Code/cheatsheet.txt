@@ -1,0 +1,114 @@
+Python Basics
+list = []
+list[0] - accessing first element 
+list[-1] - accessing last element
+list.apppend() - adding an element
+list.extend() - adding a list of elements 
+list.remove() - removes the elements specified
+del list[0] - removes the element at first position
+dict = {'Key':Value}
+dict['Key'] = Value - adding elements 
+dict.update({'Key':Value}) - adding elements
+del dict['Key'] - remove the element
+df = pandas.read_csv(file)
+df.head()
+df.tail()
+df = pandas.read_excel(file)
+df.shape
+df.columns
+df['col_name'] - selecting a single column
+df[['col_1','col_2']] - selecting multiple column
+df.loc[:,8:10] - selecting all rows, columns 8 through 10
+df.iloc[:5] - selecting the first 5 rows
+df.iloc[5:10] - selecting rows 5 to 10 
+df[df['col']=='Value'] - specifing conditions
+df['col'].dtypes - datatype
+df_new = pandas.DataFrame(df) - creating new data frame 
+df[col][df['col']==condition] - specifing condition
+freq = df['col'].value_counts() - frequently stat
+freq.rename(index={0:'no',1:'yes'}) - renaming columns of freq
+
+Statistics
+df['col'].mean() - mean 
+df['col'].median() - median 
+df['col'].quantile(0.25) - first quantile
+df['col'].quantile(0.75) - third quantile
+df['col'].mode() - mode
+df['col'].value_counts() - frequency table 
+df['col'].var(ddof=0) - variance
+df['col'].std(ddof=0) - standard deviation
+df['col'].max()-df['col'].min() - Range
+df['col'].quantile(0.75)-df['col'].quantile(0.25) - IQR
+plt.hist(x='col',data=df) - histogram
+plt.hist(x='col',data=df,bins=5) - histogram with 5 bins
+df.corr() - correlation
+sns.heatmap(df.corr())
+
+from scipy.stats import chisquare
+T,P = chisquare(f_obs=df['Observed'],f_exp=df['Expected'])
+p value id more than 0.05, fail to reject the null hypothesis; 
+observed and expected values are similar
+
+from scipy.stats import ttest_1samp
+T = ttest_1samp(df,earlier_mean)
+t-statics is more than t-critical value; reject the null hypothesis
+
+from scipy.stats import ttest_ind
+T = ttest_ind(df['col1'],df['col2'])
+t-statistic> t-critical therefore we reject the null hypothesis.
+
+Data Exploration 
+Steps:
+1. Reading raw data 
+2. Variable Identification 
+3. Univariate Analysis
+4. Bivariate Analysis
+5. Treating Missing Values and Outliers
+6. Variable Transformation 
+
+1. Reading raw data 
+df = pandas.read_csv(file)
+
+2. Variable Identification 
+df.dtypes
+df.info()
+df.columns
+
+3. Univariate Analysis
+Continous Variables
+df.describe()
+df['col'].hist()
+df['col'].plot.box()
+categorical Variables
+df['col'].value_counts()
+df['col'].value_counts()/len(df['col'])
+df['col'].value_counts().plot.bar()
+
+4. Bivariate Analysis
+continous-continous 
+df.plot.scatter('col1','col2')
+df.corr()
+
+categorical-continous variables
+df.groupby('Sex')['Age'].mean().plot.bar()
+ttest_ind(male['Age'],female['Age],nan_policy='omit')
+
+categorical-categorical varaibles 
+data = pandas.crosstab(df['Sex'],df['Survived'])
+chisquare(data)
+df.describe()
+df.describe(include='all')
+
+5. Treating missing values
+df.isnull().sum()
+df.dropna().isnull().sum()
+df.dropna(how='all')
+df.dropna(axis=1)
+df['Age'].fillna(df['Age'].mean())
+
+6. Variable Transformation 
+np.power(df['Age'],1/3).plot.hist()
+bins = [0,18,80]
+group = ['Children','Adults']
+df['Type'] = pandas.cut(df['Age'],bins,labels=group)
+ 
