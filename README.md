@@ -4,6 +4,8 @@ Internshala's Data Science Training involed 4 modules:
   2. Python for Data Science 
   3. Understanding Statistics
   4. Predictive Modelling 
+  
+  
 This repository contains notebooks 3 notebooks and 1 text files.
 The notebboks are Python Basics, Statistics and Data Exploration
 Python Basics demonstates the use of list, dictionary, handling and slicing data from dataframe.
