@@ -17,4 +17,5 @@ Data Exploration notebooks demonstrates 6 steps:
   4. Bivariate analysis
   5. Treating missing values and outliers
   6. Variable Transformation 
+  
 The text file is cheatsheet which contains all the codes taught in the course.
